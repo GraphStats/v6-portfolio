@@ -43,16 +43,26 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
     setError(null)
 
     const formData = new FormData(e.currentTarget)
-    formData.set("changelog", JSON.stringify(changelog))
-    formData.set("in_development", inDev.toString())
-    formData.set("development_status", developmentStatus)
-    formData.set("is_completed", isCompleted.toString())
-    formData.set("is_archived", isArchived.toString())
-    formData.set("development_progress", progress.toString())
-    formData.set("requires_auth", requiresAuth.toString())
+    const projectData: Partial<Project> = {
+      title: formData.get("title") as string,
+      description: formData.get("description") as string,
+      image_url: (formData.get("image_url") as string) || null,
+      project_url: (formData.get("project_url") as string) || null,
+      github_url: (formData.get("github_url") as string) || null,
+      tags: (formData.get("tags") as string)?.split(",").map(t => t.trim()).filter(Boolean) || [],
+      changelog: changelog,
+      in_development: inDev,
+      development_status: developmentStatus,
+      is_completed: isCompleted,
+      is_archived: isArchived,
+      development_progress: progress,
+      requires_auth: requiresAuth,
+    }
 
     try {
-      const result = project ? await updateProject(project.id, formData) : await createProject(formData)
+      const result = project 
+        ? await updateProject(project.id, projectData) 
+        : await createProject(projectData)
 
       if (!result.success) {
         setError(result.error || "An error occurred")
@@ -133,8 +143,8 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Header with Tabs (Sticky) */}
-      <div className="sticky top-0 z-30 bg-[#05080C]/90 backdrop-blur-xl border-b border-white/5 pb-4 mb-6">
-        <div className="relative grid grid-cols-2 p-1 bg-white/5 border border-white/10 rounded-2xl w-[350px] mx-auto overflow-hidden">
+      <div className="sticky top-0 z-30 bg-[#0B1118]/90 backdrop-blur-xl border-b border-white/10 pb-4 mb-6">
+        <div className="relative grid grid-cols-2 p-1 bg-white/[0.08] border border-white/20 rounded-2xl w-[350px] mx-auto overflow-hidden">
           {/* Sliding Indicator Background */}
           <div
             className="absolute h-[calc(100%-8px)] top-1 rounded-xl bg-primary shadow-lg shadow-primary/20 transition-all duration-300 ease-out z-0"
@@ -147,7 +157,7 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
           <button
             type="button"
             onClick={() => setActiveTab("details")}
-            className={`relative flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 z-10 ${activeTab === "details" ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
+            className={`relative flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 z-10 ${activeTab === "details" ? "text-white" : "text-foreground/50 hover:text-foreground"}`}
           >
             <LayoutGrid className="h-3.5 w-3.5" />
             1. PROJECT INFO
@@ -155,7 +165,7 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
           <button
             type="button"
             onClick={() => setActiveTab("updates")}
-            className={`relative flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 z-10 ${activeTab === "updates" ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
+            className={`relative flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 z-10 ${activeTab === "updates" ? "text-white" : "text-foreground/50 hover:text-foreground"}`}
           >
             <History className="h-3.5 w-3.5" />
             2. ADD UPDATES
@@ -173,14 +183,14 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
               <h3 className="font-bold text-xs uppercase tracking-[0.2em]">Core Settings</h3>
             </div>
 
-            <div className="space-y-4 glass p-6 rounded-3xl border-white/5 bg-white/[0.01]">
+            <div className="space-y-4 bg-white/[0.04] p-6 rounded-3xl border border-white/10">
               <div className="space-y-2">
-                <Label htmlFor="title" className="text-[10px] uppercase tracking-widest text-muted-foreground ml-1">Title</Label>
+                <Label htmlFor="title" className="text-[10px] uppercase tracking-widest text-foreground/70 ml-1">Title</Label>
                 <Input id="title" name="title" defaultValue={project?.title} required className="h-10 rounded-xl border-white/10 bg-white/5 font-bold" />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description" className="text-[10px] uppercase tracking-widest text-muted-foreground ml-1">Description</Label>
+                <Label htmlFor="description" className="text-[10px] uppercase tracking-widest text-foreground/70 ml-1">Description</Label>
                 <Textarea id="description" name="description" defaultValue={project?.description} required rows={2} className="rounded-xl border-white/10 bg-white/5 min-h-[80px] text-sm" />
               </div>
 
@@ -215,7 +225,7 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
               <h3 className="font-bold text-xs uppercase tracking-[0.2em]">Visibility Status</h3>
             </div>
 
-            <div className="glass p-6 rounded-3xl border-white/5 bg-white/[0.01] space-y-4">
+            <div className="bg-white/[0.04] p-6 rounded-3xl border border-white/10 space-y-4">
               <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
                 <div className="space-y-0.5">
                   <Label className="text-sm font-bold">In Development Mode</Label>
@@ -329,7 +339,7 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
                     </div>
 
                     <div className="space-y-1.5">
-                      <Label className="text-[9px] uppercase tracking-widest text-muted-foreground ml-1">Version</Label>
+                      <Label className="text-[9px] uppercase tracking-widest text-foreground/70 ml-1">Version</Label>
                       <Input
                         placeholder="v1.0.0"
                         value={entry.version}
@@ -338,7 +348,7 @@ export function ProjectForm({ project, onSuccess }: ProjectFormProps) {
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <Label className="text-[9px] uppercase tracking-widest text-muted-foreground ml-1">Date</Label>
+                      <Label className="text-[9px] uppercase tracking-widest text-foreground/70 ml-1">Date</Label>
                       <Input
                         type="date"
                         value={entry.date}

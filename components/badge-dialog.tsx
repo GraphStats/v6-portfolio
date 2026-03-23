@@ -58,7 +58,7 @@ export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps)
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-2xl w-[95vw] p-0 overflow-hidden glass border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col">
+            <DialogContent className="max-w-2xl w-[95vw] p-0 overflow-hidden bg-[#0B1118] border-white/20 rounded-[2.5rem] shadow-2xl flex flex-col">
                 <form onSubmit={handleSubmit} className="flex flex-col h-full overflow-hidden">
                     <div className="p-10 space-y-8">
                         <DialogHeader className="space-y-4">
@@ -68,7 +68,7 @@ export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps)
                                 </div>
                                 <div className="space-y-1 text-left">
                                     <DialogTitle className="text-3xl font-black tracking-tight font-display text-gradient uppercase">Hero Communication</DialogTitle>
-                                    <DialogDescription className="text-muted-foreground font-medium">
+                                    <DialogDescription className="text-foreground/70 font-medium">
                                         Update the headline that appears in the landing page badge.
                                     </DialogDescription>
                                 </div>
@@ -76,13 +76,13 @@ export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps)
                         </DialogHeader>
 
                         <div className="space-y-6">
-                            <div className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/5 space-y-4">
+                            <div className="p-8 rounded-[2rem] bg-white/[0.08] border border-white/10 space-y-4">
                                 <Label className="text-[10px] uppercase tracking-[0.2em] font-black text-primary/70 ml-1">Badge Headline Content</Label>
                                 <Input
                                     placeholder="e.g. New interface v3 is out! 🚀"
                                     value={text}
                                     onChange={(e) => setText(e.target.value)}
-                                    className="rounded-2xl border-white/10 glass h-16 text-xl font-bold px-6 focus:ring-primary shadow-inner bg-white/5"
+                                    className="rounded-2xl border-white/20 bg-[#0B1118] h-16 text-xl font-bold px-6 focus:ring-primary shadow-inner"
                                 />
                                 <div className="flex items-start gap-3 px-2 pt-2">
                                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
@@ -94,7 +94,7 @@ export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps)
                         </div>
                     </div>
 
-                    <DialogFooter className="p-8 border-t border-white/5 bg-black/40 backdrop-blur-xl">
+                    <DialogFooter className="p-8 border-t border-white/10 bg-black/60 backdrop-blur-xl">
                         <div className="flex gap-4 w-full sm:w-auto ml-auto">
                             <Button type="button" variant="ghost" onClick={() => onOpenChange(false)} className="rounded-xl h-12 px-6 font-bold text-muted-foreground hover:bg-white/5">
                                 Discard

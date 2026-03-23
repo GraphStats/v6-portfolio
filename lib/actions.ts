@@ -9,7 +9,7 @@ import bcrypt from "bcryptjs"
 
 export async function createProject(data: Partial<Project>) {
   try {
-    const { id, created_at, updated_at, ...insertData } = data as any
+    const { id: _, created_at: __, updated_at: ___, ...insertData } = data as any
     const [newProject] = await db.insert(projects).values({
       ...insertData,
       created_at: new Date()
@@ -26,7 +26,7 @@ export async function createProject(data: Partial<Project>) {
 
 export async function updateProject(id: string, data: Partial<Project>) {
   try {
-    const { id: _, created_at, updated_at, ...updateData } = data as any
+    const { id: _, created_at: __, updated_at: ___, ...updateData } = data as any
     await db.update(projects)
       .set(updateData)
       .where(eq(projects.id, parseInt(id)))
@@ -95,7 +95,7 @@ export async function getMaintenanceMode() {
         success: true,
         isMaintenance: data.maintenance_mode || false,
         message: data.maintenance_message || "",
-        progress: data.maintenance_progress || 0
+        progress: (data as any).maintenance_progress || 0
       }
     }
     return { success: true, isMaintenance: false, message: "", progress: 0 }

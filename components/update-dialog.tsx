@@ -143,7 +143,7 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="!max-w-[1200px] sm:!max-w-[1200px] !w-[95vw] !h-[92vh] p-0 overflow-hidden glass border-white/10 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl flex flex-col gap-0">
+            <DialogContent className="!max-w-[1200px] sm:!max-w-[1200px] !w-[95vw] !h-[92vh] p-0 overflow-hidden bg-[#0B1118] border-white/20 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl flex flex-col gap-0">
                 <form onSubmit={handleSubmit} className="flex flex-col h-full overflow-hidden">
                     <div className="flex-1 overflow-y-auto p-6 md:p-14 space-y-12">
                         <DialogHeader className="space-y-4">
@@ -153,7 +153,7 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
                                 </div>
                                 <div className="space-y-1 text-left">
                                     <DialogTitle className="text-4xl font-black tracking-tight font-display text-gradient">SYSTEM EVOLUTION</DialogTitle>
-                                    <DialogDescription className="text-muted-foreground font-medium text-lg">
+                                    <DialogDescription className="text-foreground/70 font-medium text-lg">
                                         Architect the future iterations of the digital ecosystem.
                                     </DialogDescription>
                                 </div>
@@ -162,7 +162,7 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
 
                         <div className="space-y-12">
                             {/* Timing Section */}
-                            <div className="grid gap-8 p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/5 relative overflow-hidden group">
+                            <div className="grid gap-8 p-10 rounded-[2.5rem] bg-white/[0.06] border border-white/10 relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-8 opacity-5">
                                     <History className="h-24 w-24" />
                                 </div>
@@ -177,9 +177,9 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
                                             id="no_update"
                                             checked={updateData.no_update_planned}
                                             onCheckedChange={(checked) => setUpdateData({ ...updateData, no_update_planned: !!checked })}
-                                            className="h-5 w-5 rounded-md border-white/20 data-[state=checked]:bg-primary shrink-0"
+                                            className="h-5 w-5 rounded-md border-white/40 data-[state=checked]:bg-primary shrink-0"
                                         />
-                                        <Label htmlFor="no_update" className="text-[10px] md:text-sm font-bold cursor-pointer pr-2 uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">No plans</Label>
+                                        <Label htmlFor="no_update" className="text-[10px] md:text-sm font-bold cursor-pointer pr-2 uppercase tracking-widest text-foreground/70 group-hover:text-foreground transition-colors">No plans</Label>
                                     </div>
                                 </div>
 
@@ -194,7 +194,7 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
                                                 type="datetime-local"
                                                 value={updateData.next_update_date || ""}
                                                 onChange={(e) => setUpdateData({ ...updateData, next_update_date: e.target.value })}
-                                                className="rounded-2xl border-white/10 glass h-16 text-xl font-bold px-6 focus:ring-primary shadow-2xl transition-all bg-white/5"
+                                                className="rounded-2xl border-white/20 bg-[#0B1118] h-16 text-xl font-bold px-6 focus:ring-primary shadow-2xl transition-all"
                                             />
                                             <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover/date:opacity-100 pointer-events-none transition-opacity" />
                                         </div>
@@ -221,7 +221,7 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
 
                                 <div className="space-y-6">
                                     {updateData.changelog.map((entry, index) => (
-                                        <div key={entry.id} className="p-10 rounded-[3rem] bg-white/[0.02] border border-white/5 space-y-8 relative group hover:bg-white/[0.04] transition-all duration-500">
+                                        <div key={entry.id} className="p-10 rounded-[3rem] bg-white/[0.05] border border-white/10 space-y-8 relative group hover:bg-white/[0.08] transition-all duration-500">
                                             {/* Control Bar */}
                                             <div className="flex items-center justify-between pb-6 border-b border-white/5">
                                                 <div className="flex items-center gap-4">
@@ -281,7 +281,7 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
                                                         type="date"
                                                         value={entry.date}
                                                         onChange={(e) => updateEntry(entry.id, "date", e.target.value)}
-                                                        className="rounded-2xl border-white/5 glass h-14 text-lg font-medium px-6 focus:ring-primary"
+                                                        className="rounded-2xl border-white/10 bg-white/5 h-14 text-lg font-bold px-6 focus:ring-primary focus:bg-white/10 transition-all"
                                                     />
                                                 </div>
                                             </div>
@@ -322,7 +322,7 @@ export function UpdateDialog({ open, onOpenChange, onSuccess }: UpdateDialogProp
                         </div>
                     </div>
 
-                    <DialogFooter className="p-6 md:p-10 border-t border-white/5 bg-black/40 backdrop-blur-xl shrink-0">
+                    <DialogFooter className="p-6 md:p-10 border-t border-white/10 bg-black/60 backdrop-blur-xl shrink-0">
                         <div className="flex flex-col sm:flex-row w-full justify-between items-center gap-6">
                             <p className="text-sm text-muted-foreground font-medium hidden md:block">
                                 Modifications will be synchronized with the database record.
