@@ -152,9 +152,9 @@ export default async function HomePage() {
 
             <div className="space-y-6">
               <h2 className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-[calc(-0.05em)] leading-[0.85] animate-fade-in-up font-display">
-                <span className="text-foreground/90 block">CREATIVE</span>
+                <span className="text-foreground/90 block">DRAYKO</span>
                 <span className="bg-gradient-to-r from-blue-400 via-sky-300 via-cyan-400 to-blue-600 bg-clip-text text-transparent italic inline-block pr-12 text-glow drop-shadow-[0_0_30px_rgba(56,189,248,0.3)]">
-                  DEVELOPER.
+                  PORTFOLIO.
                 </span>
               </h2>
 
