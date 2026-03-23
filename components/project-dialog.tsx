@@ -19,8 +19,8 @@ export function ProjectDialog({ open, onOpenChange, project, onSuccess }: Projec
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-6xl h-[90vh] flex flex-col p-0 overflow-hidden bg-[#05080C]/80 backdrop-blur-2xl border border-white/10 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] rounded-[2rem]">
-        <div className="px-8 pt-8 pb-4 bg-[#05080C]/40 backdrop-blur-md border-b border-white/5">
+      <DialogContent className="sm:max-w-6xl h-[90vh] flex flex-col p-0 overflow-hidden bg-[#0B1118] border border-white/20 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] rounded-[2rem]">
+        <div className="px-8 pt-8 pb-4 bg-white/[0.02] border-b border-white/10">
           <DialogHeader>
             <DialogTitle className="text-3xl font-black tracking-tight text-white">{project ? "Edit Project" : "Add New Project"}</DialogTitle>
             <DialogDescription className="text-sm font-medium text-muted-foreground">
