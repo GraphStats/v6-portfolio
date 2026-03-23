@@ -32,14 +32,14 @@ export function Footer() {
                             <ul className="space-y-3 text-muted-foreground font-medium">
                                 <li className="transition-transform hover:translate-x-1">
                                     {isHomePage ? (
-                                        <ScrollButton targetId="projects" variant="link" className="p-0 h-auto hover:text-foreground">Projects</ScrollButton>
+                                        <ScrollButton targetId="projects" variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground hover:no-underline underline-offset-0">Projects</ScrollButton>
                                     ) : (
                                         <Link href="/#projects" className="hover:text-foreground">Projects</Link>
                                     )}
                                 </li>
                                 <li className="transition-transform hover:translate-x-1">
                                     {isHomePage ? (
-                                        <ScrollButton targetId="tech-stack" variant="link" className="p-0 h-auto hover:text-foreground">Tech Stack</ScrollButton>
+                                        <ScrollButton targetId="tech-stack" variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground hover:no-underline underline-offset-0">Tech Stack</ScrollButton>
                                     ) : (
                                         <Link href="/#tech-stack" className="hover:text-foreground">Tech Stack</Link>
                                     )}
