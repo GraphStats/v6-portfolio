@@ -32,7 +32,7 @@ export default async function HomePage() {
 
   try {
     const rawProjects = await db.select().from(projectsTable).orderBy(desc(projectsTable.created_at))
-    projects = rawProjects.map(p => ({
+    projects = rawProjects.map((p: any) => ({
       ...p,
       id: p.id.toString(),
       created_at: p.created_at?.toISOString() || new Date().toISOString(),
@@ -166,7 +166,7 @@ export default async function HomePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <ScrollButton targetId="projects" size="lg" className="rounded-full px-8 bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/25 group w-full sm:w-auto transition-all text-sm font-bold uppercase tracking-widest">
+              <ScrollButton targetId="projects" size="lg" className="rounded-full px-8 bg-primary hover:bg-primary text-white hover:text-white shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/50 group w-full sm:w-auto transition-all text-sm font-bold uppercase tracking-widest">
                 Discover Projects
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </ScrollButton>

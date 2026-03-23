@@ -79,7 +79,7 @@ export async function deleteAdmin(id: string) {
 export async function getAdmins() {
   try {
     const data = await db.select().from(admins).orderBy(desc(admins.created_at))
-    return { success: true, data: data.map(admin => ({ ...admin, id: admin.id.toString(), created_at: admin.created_at?.toISOString() })) }
+    return { success: true, data: data.map((admin: any) => ({ ...admin, id: admin.id.toString(), created_at: admin.created_at?.toISOString() })) }
   } catch (error: any) {
     console.error("Error fetching admins:", error)
     return { success: false, error: error.message, data: [] }
@@ -244,7 +244,7 @@ export async function getProjects() {
     const data = await db.select().from(projects).orderBy(desc(projects.created_at))
     return { 
       success: true, 
-      data: data.map(p => ({ 
+      data: data.map((p: any) => ({ 
         ...p, 
         id: p.id.toString(), 
         created_at: p.created_at?.toISOString() || new Date().toISOString(),
