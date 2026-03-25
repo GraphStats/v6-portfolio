@@ -92,7 +92,7 @@ export default async function HomePage() {
       </header>
 
       <main className="relative z-10 pt-20">
-        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[calc(100dvh-5rem)] flex items-center justify-center overflow-hidden">
           <div className="container px-6 py-24 mx-auto text-center space-y-12">
             <div className="reveal-up stagger-1">
               <div className="flex flex-col items-center gap-4 reveal-up stagger-1">
