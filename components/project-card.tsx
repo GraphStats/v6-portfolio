@@ -315,6 +315,7 @@ function ProjectCardContent({ project, isSignedIn }: { project: Project; isSigne
         </div>
       </div>
     </div>
+  </div>
   );
 }
 
