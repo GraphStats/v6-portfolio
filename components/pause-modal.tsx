@@ -34,7 +34,7 @@ export function PauseModal() {
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => {
+    <Dialog open={isOpen} onOpenChange={(open: boolean) => {
       if (!open) handleClose()
     }}>
       <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none glass shadow-2xl">
