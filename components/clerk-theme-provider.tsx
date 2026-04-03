@@ -1,11 +1,18 @@
 "use client"
 
 import { ClerkProvider } from '@clerk/nextjs'
-import { useState, useEffect } from 'react'
 
 export function ClerkThemeProvider({ children }: { children: React.ReactNode }) {
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+
+  // If key is missing and we're in development, don't wrap in ClerkProvider to avoid crash
+  if (!publishableKey && process.env.NODE_ENV === 'development') {
+    return <>{children}</>
+  }
+
   return (
     <ClerkProvider
+      publishableKey={publishableKey}
       appearance={{
         baseTheme: undefined,
         variables: {
