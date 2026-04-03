@@ -51,19 +51,19 @@ export function PauseModal() {
           <DialogHeader className="space-y-3">
             <DialogTitle className="text-2xl font-display font-bold text-gradient flex items-center gap-2">
               <Info className="w-5 h-5 text-primary" />
-              Petit mot de ma part
+              Info Importante
             </DialogTitle>
             <DialogDescription className="text-base text-foreground/80 leading-relaxed">
-              Pour le moment, je me suis un peu éloigné de l'univers du code. Même si je continue d'en faire occasionnellement, c'est beaucoup moins qu'auparavant.
+              Je me suis un peu éloigné de l'univers du code et je code de moins en moins. Même si je continue d'en faire occasionnellement.
               <br /><br />
-              Je suis actuellement dans une sorte de <span className="text-primary font-semibold italic">"pause créative"</span>. 
+              Je suis actuellement dans une sorte de <span className="text-primary font-semibold italic">"pause"</span>.
               Merci de passer par ici et de votre compréhension !
             </DialogDescription>
           </DialogHeader>
 
           <DialogFooter className="pt-2">
-            <Button 
-              onClick={handleClose} 
+            <Button
+              onClick={handleClose}
               className="w-full sm:w-auto px-8 py-6 rounded-xl text-lg font-display font-medium transition-all hover:scale-[1.02] active:scale-[0.98] glow-border"
             >
               Accéder au site
