@@ -10,6 +10,17 @@ const createDbInstance = () => {
     if (_db) return _db;
     
     if (!databaseUrl) {
+        if (process.env.NODE_ENV === 'development') {
+            console.warn("⚠️ DATABASE_URL is not set. Using mock database for local development.");
+            const mock: any = new Proxy(() => mock, {
+                get: (target, prop) => {
+                    if (prop === 'then') return (onFullfilled: any) => onFullfilled([]);
+                    return mock;
+                },
+                apply: () => mock,
+            });
+            return mock;
+        }
         throw new Error("DATABASE_URL is not set. Please check your environment variables.");
     }
     

@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import Script from "next/script"
 import { Footer } from "@/components/footer"
 import { ClerkThemeProvider } from "@/components/clerk-theme-provider"
+import { PauseModal } from "@/components/pause-modal"
 
 import "./globals.css"
 
@@ -33,6 +34,7 @@ export default async function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             <main className="flex-1">{children}</main>
             <Footer />
+            <PauseModal />
           </div>
         </body>
       </html>
