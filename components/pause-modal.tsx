@@ -37,7 +37,7 @@ export function PauseModal() {
     <Dialog open={isOpen} onOpenChange={(open: boolean) => {
       if (!open) handleClose()
     }}>
-      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none glass shadow-2xl">
+      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] dark:shadow-[0_0_50px_-12px_rgba(0,0,0,0.8)] border border-white/20">
         {/* Header with aesthetic background */}
         <div className="relative h-32 w-full flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 construction-pattern opacity-10" />
