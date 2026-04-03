@@ -51,7 +51,7 @@ export function PauseModal() {
           <DialogHeader className="space-y-3">
             <DialogTitle className="text-2xl font-display font-bold text-gradient flex items-center gap-2">
               <Info className="w-5 h-5 text-primary" />
-              Info Importante
+              Information Importante
             </DialogTitle>
             <DialogDescription className="text-base text-foreground/80 leading-relaxed">
               Je me suis un peu éloigné de l'univers du code et je code de moins en moins. Même si je continue d'en faire occasionnellement.
