@@ -231,11 +231,9 @@ export default function AdminDashboardClient() {
 
           <div className="glass p-10 rounded-[2.5rem] border-white/5 bg-white/[0.02] relative overflow-hidden group">
             <div className="flex items-center gap-6 relative z-10">
-              {!(/\p{Extended_Pictographic}/u.test(updateData?.latest_update_text || "Fix database bug and new interface (v3!)")) && (
-                <div className="p-4 rounded-2xl bg-primary/10 text-primary shrink-0">
-                  <Sparkles className="h-8 w-8 text-primary shadow-glow shadow-primary/20" />
-                </div>
-              )}
+              <div className="p-4 rounded-2xl bg-primary/10 text-primary shrink-0">
+                <Sparkles className="h-8 w-8 text-primary shadow-glow shadow-primary/20" />
+              </div>
               <div className="space-y-1">
                 <p className="text-xs font-black uppercase tracking-[0.2em] text-primary/70">Current Live Badge Content</p>
                 <p className="text-xl md:text-3xl font-bold text-foreground/90 italic">
