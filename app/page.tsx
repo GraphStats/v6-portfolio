@@ -125,7 +125,8 @@ export default async function HomePage() {
                 `}} />
                   <Sparkles className="h-4 w-4 text-primary animate-pulse mr-2 flex-none" />
                   <span className="transition-colors duration-300">
-                    Latest update: {(updateData?.latest_update_text || "Fix database bug and new interface (v3!)").trim()}
+                    {updateData?.show_last_update_prefix !== false && "Last update : "}
+                    {(updateData?.latest_update_text || "Fix database bug and new interface (v3!)").trim()}
                   </span>
                   <div className="flex items-center w-0 group-hover:w-6 transition-all duration-300 ease-out overflow-hidden flex-none group-hover:ml-2">
                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none" className="flex-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">

@@ -38,5 +38,6 @@ export interface SiteUpdate {
   planned_features: string[];
   changelog: ChangelogEntry[];
   latest_update_text?: string;
+  show_last_update_prefix?: boolean;
   updated_at: string;
 }

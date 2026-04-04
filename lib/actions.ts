@@ -195,6 +195,7 @@ export async function getSiteUpdateData() {
           updated_at: row.updated_at?.toISOString() || new Date().toISOString(),
           changelog: row.changelog as any || [],
           planned_features: row.planned_features as any || [],
+          show_last_update_prefix: row.show_last_update_prefix ?? true,
         } as SiteUpdate
       }
     }
