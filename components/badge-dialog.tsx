@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sparkles, Save } from "lucide-react"
+import { Switch } from "@/components/ui/switch"
 import { getSiteUpdateData, updateSiteUpdateData } from "@/lib/actions"
 import { toast } from "sonner"
 
@@ -18,6 +19,7 @@ interface BadgeDialogProps {
 export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps) {
     const [isLoading, setIsLoading] = useState(false)
     const [text, setText] = useState("")
+    const [showPrefix, setShowPrefix] = useState(true)
 
     useEffect(() => {
         if (open) {
@@ -29,6 +31,7 @@ export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps)
         const result = await getSiteUpdateData()
         if (result.success && result.data) {
             setText(result.data.latest_update_text || "")
+            setShowPrefix(result.data.show_last_update_prefix ?? true)
         }
     }
 
@@ -38,7 +41,8 @@ export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps)
 
         try {
             const result = await updateSiteUpdateData({
-                latest_update_text: text
+                latest_update_text: text,
+                show_last_update_prefix: showPrefix
             })
 
             if (result.success) {
@@ -90,6 +94,18 @@ export function BadgeDialog({ open, onOpenChange, onSuccess }: BadgeDialogProps)
                                         Visible on the homepage hero section. Keep it short and impactful for better engagement.
                                     </p>
                                 </div>
+                            </div>
+
+                            <div className="p-8 rounded-[2rem] bg-muted/40 border border-border/80 flex items-center justify-between gap-4">
+                                <div className="space-y-1">
+                                    <Label className="text-[10px] uppercase tracking-[0.2em] font-black text-primary/70 ml-1">Prefix Visibility</Label>
+                                    <p className="text-sm font-bold text-foreground">Show "Last update :" prefix</p>
+                                    <p className="text-xs text-muted-foreground italic">Toggle the visibility of the "Last update :" text before your message.</p>
+                                </div>
+                                <Switch
+                                    checked={showPrefix}
+                                    onCheckedChange={setShowPrefix}
+                                />
                             </div>
                         </div>
                     </div>

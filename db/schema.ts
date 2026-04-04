@@ -39,5 +39,6 @@ export const siteUpdates = pgTable("site_updates", {
   planned_features: jsonb("planned_features").$type<string[]>().default([]),
   changelog: jsonb("changelog").$type<any[]>().default([]),
   latest_update_text: text("latest_update_text"),
+  show_last_update_prefix: boolean("show_last_update_prefix").default(true),
   updated_at: timestamp("updated_at").defaultNow(),
 });
