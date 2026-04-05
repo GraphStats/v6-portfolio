@@ -4,8 +4,7 @@ import Image from "next/image"
 
 interface TechItem {
   name: string
-  logo: string // Changed from icon: LucideIcon
-  // Removed color: string
+  logo: string
 }
 
 const techStack: TechItem[] = [
@@ -27,7 +26,33 @@ const techStack: TechItem[] = [
   { name: "Vercel", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
   { name: "Cloudflare", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg" },
   { name: "AWS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+  { name: "Proxmox", logo: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proxmox.svg" },
+  { name: "Bash", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
 ]
+
+const half = Math.ceil(techStack.length / 2)
+const row1 = techStack.slice(0, half)
+const row2 = techStack.slice(half)
+
+function TechCard({ tech }: { tech: TechItem }) {
+  return (
+    <div className="group/card relative h-40 w-48 shrink-0 flex flex-col items-center justify-center gap-4 rounded-3xl glass border-white/5 hover:border-primary/30 transition-all duration-500 cursor-pointer overflow-hidden hover:-translate-y-2 hover:scale-[1.03]">
+      <div className="absolute inset-0 bg-primary/0 group-hover/card:bg-primary/5 transition-colors duration-500" />
+      <div className="relative w-12 h-12 flex items-center justify-center p-1 group-hover/card:scale-125 transition-all duration-500">
+        <Image
+          src={tech.logo}
+          alt={tech.name}
+          width={48}
+          height={48}
+          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
+        />
+      </div>
+      <span className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground group-hover/card:text-foreground transition-colors">
+        {tech.name}
+      </span>
+    </div>
+  )
+}
 
 export function TechStack() {
   return (
@@ -42,31 +67,39 @@ export function TechStack() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-stretch">
-          {techStack.map((tech, index) => {
-            return (
-              <div
-                key={tech.name}
-                className="group relative h-40 flex flex-col items-center justify-center gap-4 rounded-3xl glass border-white/5 hover:border-primary/30 transition-all duration-500 cursor-pointer overflow-hidden reveal-up perspective-card"
-                style={{ animationDelay: `${(index + 3) * 100}ms` }}
-              >
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500" />
-                <div className="relative w-12 h-12 flex items-center justify-center p-1 group-hover:scale-125 transition-all duration-500">
-                  <Image
-                    src={tech.logo}
-                    alt={tech.name}
-                    width={48}
-                    height={48}
-                    className={`w-full h-full object-contain transition-all duration-500 group-hover:scale-110 ${["Vercel", "AWS"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
-                  />
-                </div>
-                <span className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">
-                  {tech.name}
-                </span>
+        {/* Masque sur l'outer div SANS overflow */}
+        <div
+          style={{
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+            maskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+          }}
+        >
+          {/* overflow-hidden sur l'inner div */}
+          <div className="overflow-hidden py-4">
+            <div className="flex flex-col gap-6">
+
+              {/* Ligne 1 — gauche */}
+              <div className="flex w-max gap-6">
+                {[...row1, ...row1].map((tech, i) => (
+                  <div key={`r1-${i}`} style={{ animation: "marquee-left 40s linear infinite" }}>
+                    <TechCard tech={tech} />
+                  </div>
+                ))}
               </div>
-            )
-          })}
+
+              {/* Ligne 2 — droite */}
+              <div className="flex w-max gap-6">
+                {[...row2, ...row2].map((tech, i) => (
+                  <div key={`r2-${i}`} style={{ animation: "marquee-right 40s linear infinite" }}>
+                    <TechCard tech={tech} />
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
   )
