@@ -9,7 +9,6 @@ bcrypt.hash(password, saltRounds, function (err, hash) {
     return;
   }
   console.log("\n--- NEW ADMIN ACCOUNT DETAILS ---\n");
-  console.log("Password (plain):", password);
   console.log("Bcypt Hash (for DB):", hash);
   console.log("\n--- SQL COMMAND ---\n");
   console.log(
