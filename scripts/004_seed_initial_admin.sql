@@ -1,5 +1,5 @@
 -- Insert initial admin
--- Password: [REDACTED_PASSWORD] (hashed with SHA-256)
+-- SHA-256 hashed password below
 INSERT INTO admins (email, password)
-VALUES ('[REDACTED_EMAIL]', '[REDACTED_HASH]')
+VALUES ('[EMAIL_ADDRESS]', '[PASSWORD]')
 ON CONFLICT (email) DO NOTHING;
