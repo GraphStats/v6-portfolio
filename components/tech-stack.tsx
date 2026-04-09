@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { useEffect, useRef } from "react"
 
 interface TechItem {
   name: string
@@ -18,7 +19,7 @@ const techStack: TechItem[] = [
   { name: "ChatGPT", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
   { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
   { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-  { name: "OVHcloud", logo: "https://help.ovhcloud.com/a2a82603cd444d10f0788c63c19c1a4e.iix" },
+  { name: "OVHcloud", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ovh.svg" },
   { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
   { name: "PM2", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pm2/pm2-original.svg" },
   { name: "NPM", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" },
@@ -55,8 +56,22 @@ function TechCard({ tech }: { tech: TechItem }) {
 }
 
 export function TechStack() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const setHeight = () => {
+      if (sectionRef.current) {
+        sectionRef.current.style.height = `${window.innerHeight}px`
+        sectionRef.current.style.maxHeight = `${window.innerHeight}px`
+      }
+    }
+    setHeight()
+    window.addEventListener("resize", setHeight)
+    return () => window.removeEventListener("resize", setHeight)
+  }, [])
+
   return (
-    <section id="tech-stack" className="py-32 relative overflow-hidden">
+    <section ref={sectionRef} id="tech-stack" className="w-full relative overflow-hidden flex flex-col justify-center">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center text-center mb-24 space-y-4">
           <div className="text-primary font-bold tracking-widest text-sm uppercase reveal-up">Expertise</div>
@@ -66,40 +81,50 @@ export function TechStack() {
             and future-proof digital solutions.
           </p>
         </div>
+      </div>
 
-        {/* Masque sur l'outer div SANS overflow */}
-        <div
-          style={{
-            WebkitMaskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-            maskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-          }}
-        >
-          {/* overflow-hidden sur l'inner div */}
-          <div className="overflow-hidden py-4">
-            <div className="flex flex-col gap-6">
+      {/* Masque sur l'outer div SANS overflow, prend toute la largeur */}
+      <div
+        className="w-full"
+        style={{
+          WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+          maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+        }}
+      >
+        {/* overflow-hidden sur l'inner div avec padding augmenté pour les ombres */}
+        <div className="overflow-hidden py-12">
+          <div className="flex flex-col gap-6">
 
-              {/* Ligne 1 — gauche */}
-              <div className="flex w-max gap-6">
-                {[...row1, ...row1].map((tech, i) => (
-                  <div key={`r1-${i}`} style={{ animation: "marquee-left 40s linear infinite" }}>
-                    <TechCard tech={tech} />
-                  </div>
+            {/* Ligne 1 — gauche */}
+            <div className="flex w-max gap-6 hover:[&>div]:!animate-play-state-paused">
+              <div className="flex shrink-0 gap-6" style={{ animation: "marquee-left 60s linear infinite" }}>
+                {row1.map((tech, i) => (
+                  <TechCard key={`row1-a-${i}`} tech={tech} />
                 ))}
               </div>
-
-              {/* Ligne 2 — droite */}
-              <div className="flex w-max gap-6">
-                {[...row2, ...row2].map((tech, i) => (
-                  <div key={`r2-${i}`} style={{ animation: "marquee-right 40s linear infinite" }}>
-                    <TechCard tech={tech} />
-                  </div>
+              <div className="flex shrink-0 gap-6" aria-hidden="true" style={{ animation: "marquee-left 60s linear infinite" }}>
+                {row1.map((tech, i) => (
+                  <TechCard key={`row1-b-${i}`} tech={tech} />
                 ))}
               </div>
-
             </div>
+
+            {/* Ligne 2 — droite */}
+            <div className="flex w-max gap-6 hover:[&>div]:!animate-play-state-paused">
+              <div className="flex shrink-0 gap-6" style={{ animation: "marquee-right 60s linear infinite" }}>
+                {row2.map((tech, i) => (
+                  <TechCard key={`row2-a-${i}`} tech={tech} />
+                ))}
+              </div>
+              <div className="flex shrink-0 gap-6" aria-hidden="true" style={{ animation: "marquee-right 60s linear infinite" }}>
+                {row2.map((tech, i) => (
+                  <TechCard key={`row2-b-${i}`} tech={tech} />
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
-
       </div>
     </section>
   )

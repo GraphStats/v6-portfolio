@@ -426,3 +426,8 @@
 .perspective-card:hover .glass {
   border-color: rgba(var(--primary), 0.4);
 }
+
+/* Tech-stack section overflow control — height is set by JS */
+#tech-stack {
+  overflow: hidden;
+}
