@@ -32,7 +32,7 @@ const techStack: TechItem[] = [
   { name: "Linux", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
   { name: "Ubuntu", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-original.svg" },
   { name: "Debian", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg" },
-  { name: "Fedora", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fedora/fedora-original.svg" },
+  { name: "Fedora", logo: "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_(2021).svg" },
 ]
 
 const half = Math.ceil(techStack.length / 2)
