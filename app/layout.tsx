@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   title: "Drayko - Creative Developer",
   description: "Portfolio of Drayko, a Creative Developer & Designer specializing in high-performance digital experiences.",
   generator: "v0.app",
+  icons: {
+    icon: "/picto.png",
+    apple: "/picto.png",
+  },
   other: {
     "google-adsense-account": process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ACCOUNT || "",
   },
