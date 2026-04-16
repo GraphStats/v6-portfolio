@@ -10,7 +10,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Coffee, Info } from 'lucide-react'
+import { Rocket, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function PauseModal() {
@@ -18,7 +18,7 @@ export function PauseModal() {
 
   useEffect(() => {
     // Check if the modal has already been shown in this session
-    const hasSeenModal = sessionStorage.getItem('hasSeenPauseModal')
+    const hasSeenModal = sessionStorage.getItem('hasSeenReturnModal')
     if (!hasSeenModal) {
       // Delay opening slightly for a better feel
       const timer = setTimeout(() => {
@@ -30,7 +30,7 @@ export function PauseModal() {
 
   const handleClose = () => {
     setIsOpen(false)
-    sessionStorage.setItem('hasSeenPauseModal', 'true')
+    sessionStorage.setItem('hasSeenReturnModal', 'true')
   }
 
   return (
@@ -43,21 +43,20 @@ export function PauseModal() {
           <div className="absolute inset-0 construction-pattern opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20" />
           <div className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-background/80 backdrop-blur-md border border-white/20 shadow-xl animate-float">
-            <Coffee className="w-8 h-8 text-primary" />
+            <Rocket className="w-8 h-8 text-primary" />
           </div>
         </div>
 
         <div className="p-8 space-y-6">
           <DialogHeader className="space-y-3">
             <DialogTitle className="text-2xl font-display font-bold text-gradient flex items-center gap-2">
-              <Info className="w-5 h-5 text-primary" />
-              Important Information
+              <Sparkles className="w-5 h-5 text-primary" />
+              I'm Back!
             </DialogTitle>
             <DialogDescription className="text-base text-foreground/80 leading-relaxed">
-              I've stepped away from the coding world a bit and I'm coding less and less. Even though I continue to do some occasionally.
+              After about a 2-week break, I am back in full force! Ready to take on new challenges and continue building amazing things.
               <br /><br />
-              I am currently in a sort of <span className="text-primary font-semibold italic">"pause"</span>.
-              Thank you for stopping by and for your understanding!
+              Thank you for your patience and for stopping by!
             </DialogDescription>
           </DialogHeader>
 
