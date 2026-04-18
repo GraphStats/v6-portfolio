@@ -45,6 +45,12 @@ const techStack: TechItem[] = [
   { name: "Auth0", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/auth0.svg" },
   { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
   { name: "Tailscale", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tailscale.svg" },
+  { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+  { name: "Gitea", logo: "https://github.com/go-gitea.png" },
+  { name: "Windows", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows11/windows11-original.svg" },
+  { name: "Windows Server", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg" },
+  { name: "OpenCore", logo: "https://github.com/acidanthera.png" },
+  { name: "MacOS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg" },
 ]
 
 const half = Math.ceil(techStack.length / 2)
@@ -61,7 +67,7 @@ function TechCard({ tech }: { tech: TechItem }) {
           alt={tech.name}
           width={48}
           height={48}
-          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS", "UniFi OS Server", "pnpm", "Express", "Clerk", "Auth0", "Tailscale"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
+          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS", "UniFi OS Server", "pnpm", "Express", "Clerk", "Auth0", "Tailscale", "MacOS"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
         />
       </div>
       <span className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground group-hover/card:text-foreground transition-colors">
