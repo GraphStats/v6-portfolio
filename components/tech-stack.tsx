@@ -13,7 +13,7 @@ const techStack: TechItem[] = [
   { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
   { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
   { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-  { name: "SQL", logo: "https://www.svgrepo.com/show/303251/mysql-logo.svg" },
+  { name: "SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" },
   { name: "HTML", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
   { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
   { name: "ChatGPT", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
@@ -33,6 +33,7 @@ const techStack: TechItem[] = [
   { name: "Ubuntu", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-original.svg" },
   { name: "Debian", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg" },
   { name: "Fedora", logo: "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_(2021).svg" },
+  { name: "UniFi OS Server", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ubiquiti.svg" },
 ]
 
 const half = Math.ceil(techStack.length / 2)
@@ -49,7 +50,7 @@ function TechCard({ tech }: { tech: TechItem }) {
           alt={tech.name}
           width={48}
           height={48}
-          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
+          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS", "UniFi OS Server"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
         />
       </div>
       <span className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground group-hover/card:text-foreground transition-colors">
