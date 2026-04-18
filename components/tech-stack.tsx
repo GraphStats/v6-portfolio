@@ -34,6 +34,17 @@ const techStack: TechItem[] = [
   { name: "Debian", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg" },
   { name: "Fedora", logo: "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_(2021).svg" },
   { name: "UniFi OS Server", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ubiquiti.svg" },
+  { name: "pnpm", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/pnpm.svg" },
+  { name: "Vite", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" },
+  { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
+  { name: "Supabase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
+  { name: "Neon", logo: "https://github.com/neondatabase.png" },
+  { name: "Firebase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" },
+  { name: "Prisma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
+  { name: "Clerk", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/clerk.svg" },
+  { name: "Auth0", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/auth0.svg" },
+  { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+  { name: "Tailscale", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tailscale.svg" },
 ]
 
 const half = Math.ceil(techStack.length / 2)
@@ -50,7 +61,7 @@ function TechCard({ tech }: { tech: TechItem }) {
           alt={tech.name}
           width={48}
           height={48}
-          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS", "UniFi OS Server"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
+          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS", "UniFi OS Server", "pnpm", "Express", "Clerk", "Auth0", "Tailscale"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
         />
       </div>
       <span className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground group-hover/card:text-foreground transition-colors">
