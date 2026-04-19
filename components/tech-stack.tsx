@@ -13,7 +13,7 @@ const techStack: TechItem[] = [
   { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
   { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
   { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-  { name: "SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" },
+  { name: "SQL", logo: "https://www.svgrepo.com/show/373848/mysql.svg" },
   { name: "HTML", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
   { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
   { name: "ChatGPT", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
@@ -52,6 +52,7 @@ const techStack: TechItem[] = [
   { name: "OpenCore", logo: "https://cdn.jsdelivr.net/gh/acidanthera/OpenCorePkg@master/Docs/Logos/Logo.png" },
   { name: "MacOS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg" },
   { name: "Drizzle ORM", logo: "https://github.com/drizzle-team.png" },
+  { name: "Nginx", logo: "https://cdn.worldvectorlogo.com/logos/nginx-2.svg" },
 ]
 
 const third = Math.ceil(techStack.length / 3)
