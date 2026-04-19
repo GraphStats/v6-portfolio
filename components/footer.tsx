@@ -44,7 +44,7 @@ export function Footer() {
                                         <Link href="/#tech-stack" className="hover:text-foreground">Tech Stack</Link>
                                     )}
                                 </li>
-                                                                <li className="transition-transform hover:translate-x-1"><Link href="/tags-info" className="hover:text-foreground">Tags Info</Link></li>
+                                <li className="transition-transform hover:translate-x-1"><Link href="/tags-info" className="hover:text-foreground">Tags Info</Link></li>
                                 <li className="transition-transform hover:translate-x-1"><Link href="/about" className="hover:text-foreground">About Me</Link></li>
 
                             </ul>
@@ -52,8 +52,8 @@ export function Footer() {
                         <div className="space-y-4">
                             <h5 className="font-bold text-sm uppercase tracking-widest text-primary">Social</h5>
                             <ul className="space-y-3 text-muted-foreground font-medium">
-                                <li className="transition-transform hover:translate-x-1"><Link href="https://github.com/GraphStats" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-all flex items-center gap-2"><Github className="h-4 w-4" /> GitHub</Link></li>
-                                <li className="transition-transform hover:translate-x-1"><Link href="https://gitlab.com/graphstats.pro" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-all flex items-center gap-2"><Gitlab className="h-4 w-4" /> GitLab</Link></li>
+                                <li className="transition-transform hover:translate-x-1"><Link href="https://github.com/ddrayko" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-all flex items-center gap-2"><Github className="h-4 w-4" /> GitHub</Link></li>
+                                <li className="transition-transform hover:translate-x-1"><Link href="https://gitlab.com/drayko_dev" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-all flex items-center gap-2"><Gitlab className="h-4 w-4" /> GitLab</Link></li>
                                 <li className="transition-transform hover:translate-x-1"><Link href="/contact" className="hover:text-foreground transition-all flex items-center gap-2"><MessageSquare className="h-4 w-4" /> Contact</Link></li>
                             </ul>
                         </div>
