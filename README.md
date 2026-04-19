@@ -18,3 +18,7 @@
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=ddrayko/v6-portfolio&type=date&legend=top-left" />
  </picture>
 </a>
+
+---
+
+© 2025 - 2026 Drayko. All rights reserved.
