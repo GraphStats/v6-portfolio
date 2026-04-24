@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   },
 }
 
+import { Suspense } from "react"
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -32,7 +34,9 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} light`}>
         <body className="font-sans antialiased selection:bg-primary/30 selection:text-primary transition-colors duration-300" suppressHydrationWarning>
           <div className="relative flex min-h-screen flex-col">
-            <main className="flex-1">{children}</main>
+            <Suspense fallback={null}>
+              <main className="flex-1">{children}</main>
+            </Suspense>
             <Footer />
             <PauseModal />
           </div>
