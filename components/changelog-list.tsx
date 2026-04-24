@@ -46,34 +46,7 @@ export function ChangelogList({ entries }: ChangelogListProps) {
                             {isLeft ? (
                                 <>
                                     <div className="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12">
-                                <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:translate-y-[-5px]">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <span className="text-primary font-black font-display text-2xl tracking-tighter">{entry.version}</span>
-                                        <div className="flex items-center gap-2">
-                                            {isScheduled && (
-                                                <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md bg-primary/20 text-primary border border-primary/20 animate-pulse">
-                                                    Scheduled
-                                                </span>
-                                            )}
-                                            <span className="text-xs font-bold text-muted-foreground bg-white/5 px-3 py-1 rounded-full">{entry.date}</span>
-                                        </div>
-                                    </div>
-                                    <ul className="space-y-3">
-                                        {entry.changes.map((change, cIdx) => (
-                                            <li key={cIdx} className="flex gap-3 text-sm text-foreground/80 font-medium leading-relaxed">
-                                                <CheckCircle2 className="h-4 w-4 shrink-0 text-primary mt-0.5" />
-                                                {change}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    </div>
-                                    <div className="hidden md:block md:w-1/2" />
-                                </>
-                            ) : (
-                                <>
-                                    <div className="hidden md:block md:w-1/2" />
-                                    <div className="w-full md:w-1/2 pl-16 md:pl-12">
-                                        <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:-translate-y-1">
+                                        <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:translate-y-[-5px]">
                                             <div className="flex items-center justify-between mb-4">
                                                 <span className="text-primary font-black font-display text-2xl tracking-tighter">{entry.version}</span>
                                                 <div className="flex items-center gap-2">
@@ -95,12 +68,11 @@ export function ChangelogList({ entries }: ChangelogListProps) {
                                             </ul>
                                         </div>
                                     </div>
-                                </>
-                            )}
-                        </div>
-                    )
+                                    <div className="hidden md:block w-1/2 shrink-0" />
+                                </div>
+                            )
                 })
             )}
-        </div>
-    )
-}
+                        </div>
+                    )
+                }
