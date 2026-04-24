@@ -42,7 +42,7 @@ export function ChangelogList({ entries }: ChangelogListProps) {
                             {/* Timeline Dot */}
                             <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background z-20 group-hover:scale-150 transition-transform duration-500 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
 
-                            <div className="w-full md:w-1/2 pl-16 md:pl-0 md:px-12">
+                            <div className={`w-full md:w-1/2 shrink-0 pl-16 md:pl-0 ${idx % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
                                 <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:translate-y-[-5px]">
                                     <div className="flex items-center justify-between mb-4">
                                         <span className="text-primary font-black font-display text-2xl tracking-tighter">{entry.version}</span>
@@ -65,7 +65,7 @@ export function ChangelogList({ entries }: ChangelogListProps) {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="hidden md:block w-1/2" />
+                            <div className="hidden md:block w-1/2 shrink-0" />
                         </div>
                     )
                 })
