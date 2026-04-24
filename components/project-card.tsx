@@ -14,7 +14,7 @@ interface ProjectCardProps {
   project: Project
 }
 
-function ProjectCardContent({ project, isSignedIn }: { project: Project; isSignedIn: boolean }) {
+function ProjectCardContent({ project, isSignedIn, SignInButton }: { project: Project; isSignedIn: boolean; SignInButton: any }) {
   const isFinished = project.is_completed;
   const isArchived = project.is_archived;
   const isInDev = project.in_development;
