@@ -2,7 +2,7 @@ import postgres from 'postgres';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import * as schema from './schema';
 
-const databaseUrl = process.env.DATABASE_URL;
+const databaseUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 
 let _db: any = null;
 
@@ -11,7 +11,7 @@ const createDbInstance = () => {
     
     if (!databaseUrl) {
         if (process.env.NODE_ENV === 'development') {
-            console.warn("⚠️ DATABASE_URL is not set. Using mock database for local development.");
+            console.warn("⚠️ DATABASE_URL or POSTGRES_URL is not set. Using mock database for local development.");
             const mock: any = new Proxy(() => mock, {
                 get: (target, prop) => {
                     if (prop === 'then') return (onFullfilled: any) => onFullfilled([]);
@@ -21,7 +21,7 @@ const createDbInstance = () => {
             });
             return mock;
         }
-        throw new Error("DATABASE_URL is not set. Please check your environment variables.");
+        throw new Error("DATABASE_URL or POSTGRES_URL is not set. Please check your environment variables.");
     }
     
     const sql = postgres(databaseUrl, { prepare: false });
