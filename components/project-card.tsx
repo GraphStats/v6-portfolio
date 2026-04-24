@@ -326,9 +326,8 @@ function ProjectCardWithClerk({ project }: ProjectCardProps) {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-  const isDev = process.env.NODE_ENV === 'development'
 
-  if (!publishableKey && isDev) {
+  if (!publishableKey) {
     return <ProjectCardContent project={project} isSignedIn={false} />
   }
 
