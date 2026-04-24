@@ -30,9 +30,9 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkThemeProvider>
-      <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} light`}>
-        <body className="font-sans antialiased selection:bg-primary/30 selection:text-primary transition-colors duration-300" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} light`}>
+      <body className="font-sans antialiased selection:bg-primary/30 selection:text-primary transition-colors duration-300" suppressHydrationWarning>
+        <ClerkThemeProvider>
           <div className="relative flex min-h-screen flex-col">
             <Suspense fallback={null}>
               <main className="flex-1">{children}</main>
@@ -40,8 +40,8 @@ export default async function RootLayout({
             <Footer />
             <PauseModal />
           </div>
-        </body>
-      </html>
-    </ClerkThemeProvider>
+        </ClerkThemeProvider>
+      </body>
+    </html>
   )
 }
