@@ -45,8 +45,8 @@ export function ChangelogList({ entries }: ChangelogListProps) {
 
                             {isLeft ? (
                                 <>
-                                    <div className="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12">
-                                        <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:translate-y-[-5px]">
+                                    <div className="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12 flex md:justify-end">
+                                        <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:translate-y-[-5px] w-full max-w-md">
                                             <div className="flex items-center justify-between mb-4">
                                                 <span className="text-primary font-black font-display text-2xl tracking-tighter">{entry.version}</span>
                                                 <div className="flex items-center gap-2">
@@ -73,8 +73,8 @@ export function ChangelogList({ entries }: ChangelogListProps) {
                             ) : (
                                 <>
                                     <div className="hidden md:block md:w-1/2" />
-                                    <div className="w-full md:w-1/2 pl-16 md:pl-12">
-                                        <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:-translate-y-1">
+                                    <div className="w-full md:w-1/2 pl-16 md:pl-12 flex md:justify-start">
+                                        <div className="glass p-8 rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 group-hover:-translate-y-1 w-full max-w-md">
                                             <div className="flex items-center justify-between mb-4">
                                                 <span className="text-primary font-black font-display text-2xl tracking-tighter">{entry.version}</span>
                                                 <div className="flex items-center gap-2">
