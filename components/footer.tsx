@@ -12,7 +12,7 @@ export function Footer() {
 
     return (
         <footer className="py-20 border-t border-white/5 bg-background relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-blue-500" />
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
                     <div className="space-y-6">
