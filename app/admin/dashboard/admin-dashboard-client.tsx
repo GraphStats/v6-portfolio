@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Plus, LogOut, Home, UserPlus, LayoutDashboard, Database, Shield, History as HistoryIcon, Activity, Sparkles } from "lucide-react"
+import { Plus, LogOut, Home, UserPlus, LayoutDashboard, Database, Shield, History as HistoryIcon, Activity, Sparkles, Map } from "lucide-react"
 import { AdminProjectCard } from "@/components/admin-project-card"
+import { AdminMomentCard } from "@/components/admin-moment-card"
 import { ProjectDialog } from "@/components/project-dialog"
+import { MomentDialog } from "@/components/moment-dialog"
 import { AdminDialog } from "@/components/admin-dialog"
 import { AdminCard } from "@/components/admin-card"
 import { AdminStats } from "@/components/admin-stats"
@@ -12,18 +14,21 @@ import { UpdateDialog } from "@/components/update-dialog"
 import { BadgeDialog } from "@/components/badge-dialog"
 import { Separator } from "@/components/ui/separator"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
-import type { Project, Admin, SiteUpdate } from "@/lib/types"
+import type { Project, Admin, SiteUpdate, Moment } from "@/lib/types"
 import { logoutAdmin } from "@/lib/auth"
-import { getAdmins, getMaintenanceMode, getAvailability, getProjects, getSiteUpdateData } from "@/lib/actions"
+import { getAdmins, getMaintenanceMode, getAvailability, getProjects, getSiteUpdateData, getMoments } from "@/lib/actions"
 import { MaintenanceToggle } from "@/components/maintenance-toggle"
 import { AvailabilityToggle } from "@/components/availability-toggle"
 import Link from "next/link"
 
 export default function AdminDashboardClient() {
   const [projects, setProjects] = useState<Project[]>([])
+  const [moments, setMoments] = useState<Moment[]>([])
   const [admins, setAdmins] = useState<Admin[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [isMomentsLoading, setIsMomentsLoading] = useState(true)
   const [addProjectOpen, setAddProjectOpen] = useState(false)
+  const [addMomentOpen, setAddMomentOpen] = useState(false)
   const [addAdminOpen, setAddAdminOpen] = useState(false)
   const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
   const [badgeDialogOpen, setBadgeDialogOpen] = useState(false)
@@ -39,6 +44,15 @@ export default function AdminDashboardClient() {
       setProjects(result.data)
     }
     setIsLoading(false)
+  }
+
+  const fetchMoments = async () => {
+    setIsMomentsLoading(true)
+    const result = await getMoments()
+    if (result.success) {
+      setMoments(result.data)
+    }
+    setIsMomentsLoading(false)
   }
 
   const fetchAdmins = async () => {
@@ -73,6 +87,7 @@ export default function AdminDashboardClient() {
 
   useEffect(() => {
     fetchProjects()
+    fetchMoments()
     fetchAdmins()
     fetchUpdateData()
     fetchMaintenanceMode()
@@ -83,8 +98,16 @@ export default function AdminDashboardClient() {
     setProjects((prev) => prev.filter((p) => p.id !== projectId))
   }
 
+  const handleMomentDeleted = (momentId: string) => {
+    setMoments((prev) => prev.filter((m) => m.id !== momentId))
+  }
+
   const handleProjectUpdated = () => {
     fetchProjects()
+  }
+
+  const handleMomentUpdated = () => {
+    fetchMoments()
   }
 
   const handleAdminDeleted = () => {
@@ -148,45 +171,92 @@ export default function AdminDashboardClient() {
               </div>
             </AccordionTrigger>
             <AccordionContent className="bg-white/20 dark:bg-white/[0.02] backdrop-blur-xl border border-t-0 border-black/5 dark:border-white/10 p-10 rounded-b-[2rem] shadow-xl">
-              <div className="space-y-8">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-8">
-                  <div className="space-y-2">
-                    <h2 className="text-2xl font-bold tracking-tight">MANAGE PROJECTS</h2>
-                    <p className="text-muted-foreground font-medium max-w-xl text-sm">
-                      Update your latest achievements and keep your professional presence sharp.
-                    </p>
+              <div className="space-y-16">
+                {/* Projects Section */}
+                <div className="space-y-8">
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-8">
+                    <div className="space-y-2">
+                      <h2 className="text-2xl font-bold tracking-tight">MANAGE PROJECTS</h2>
+                      <p className="text-muted-foreground font-medium max-w-xl text-sm">
+                        Update your latest achievements and keep your professional presence sharp.
+                      </p>
+                    </div>
+                    <Button onClick={() => setAddProjectOpen(true)} className="rounded-xl h-12 px-6 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 group self-start md:self-auto transition-all">
+                      <Plus className="mr-2 h-4 w-4 group-hover:rotate-90 transition-transform duration-300" />
+                      New Project
+                    </Button>
                   </div>
-                  <Button onClick={() => setAddProjectOpen(true)} className="rounded-xl h-12 px-6 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 group self-start md:self-auto transition-all">
-                    <Plus className="mr-2 h-4 w-4 group-hover:rotate-90 transition-transform duration-300" />
-                    New Project
-                  </Button>
+
+                  {isLoading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="h-64 rounded-2xl bg-white/40 dark:bg-white/5 border border-black/5 dark:border-white/5 animate-pulse" />
+                      ))}
+                    </div>
+                  ) : projects.length === 0 ? (
+                    <div className="bg-black/5 dark:bg-white/5 p-12 rounded-3xl border border-black/5 dark:border-white/5 text-center space-y-4 shadow-inner">
+                      <div className="w-16 h-16 rounded-full bg-black/5 dark:bg-white/5 mx-auto flex items-center justify-center text-muted-foreground">
+                        <Database className="h-8 w-8" />
+                      </div>
+                      <p className="text-muted-foreground italic">No projects archived yet.</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {projects.map((project) => (
+                        <AdminProjectCard
+                          key={project.id}
+                          project={project}
+                          onDeleted={handleProjectDeleted}
+                          onUpdated={handleProjectUpdated}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {isLoading ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="h-64 rounded-2xl bg-white/40 dark:bg-white/5 border border-black/5 dark:border-white/5 animate-pulse" />
-                    ))}
-                  </div>
-                ) : projects.length === 0 ? (
-                  <div className="bg-black/5 dark:bg-white/5 p-12 rounded-3xl border border-black/5 dark:border-white/5 text-center space-y-4 shadow-inner">
-                    <div className="w-16 h-16 rounded-full bg-black/5 dark:bg-white/5 mx-auto flex items-center justify-center text-muted-foreground">
-                      <Database className="h-8 w-8" />
+                <Separator className="bg-white/5" />
+
+                {/* Moments Section */}
+                <div className="space-y-8">
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-8">
+                    <div className="space-y-2">
+                      <h2 className="text-2xl font-bold tracking-tight">MY JOURNEY (MOMENTS)</h2>
+                      <p className="text-muted-foreground font-medium max-w-xl text-sm">
+                        Document your professional evolution, education, and career milestones.
+                      </p>
                     </div>
-                    <p className="text-muted-foreground italic">No projects archived yet.</p>
+                    <Button onClick={() => setAddMomentOpen(true)} variant="outline" className="rounded-xl h-12 px-6 glass border-white/10 hover:bg-white/10 transition-all group self-start md:self-auto">
+                      <Plus className="mr-2 h-4 w-4 group-hover:rotate-90 transition-transform duration-300" />
+                      Add Moment
+                    </Button>
                   </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map((project) => (
-                      <AdminProjectCard
-                        key={project.id}
-                        project={project}
-                        onDeleted={handleProjectDeleted}
-                        onUpdated={handleProjectUpdated}
-                      />
-                    ))}
-                  </div>
-                )}
+
+                  {isMomentsLoading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="h-32 rounded-2xl bg-white/40 dark:bg-white/5 border border-black/5 dark:border-white/5 animate-pulse" />
+                      ))}
+                    </div>
+                  ) : moments.length === 0 ? (
+                    <div className="bg-black/5 dark:bg-white/5 p-12 rounded-3xl border border-black/5 dark:border-white/5 text-center space-y-4 shadow-inner">
+                      <div className="w-16 h-16 rounded-full bg-black/5 dark:bg-white/5 mx-auto flex items-center justify-center text-muted-foreground">
+                        <Map className="h-8 w-8" />
+                      </div>
+                      <p className="text-muted-foreground italic">No moments recorded yet.</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {moments.map((moment) => (
+                        <AdminMomentCard
+                          key={moment.id}
+                          moment={moment}
+                          onDeleted={handleMomentDeleted}
+                          onUpdated={handleMomentUpdated}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </AccordionContent>
           </AccordionItem>
@@ -374,6 +444,7 @@ export default function AdminDashboardClient() {
       </main>
 
       <ProjectDialog open={addProjectOpen} onOpenChange={setAddProjectOpen} onSuccess={fetchProjects} />
+      <MomentDialog open={addMomentOpen} onOpenChange={setAddMomentOpen} onSuccess={fetchMoments} />
       <AdminDialog open={addAdminOpen} onOpenChange={setAddAdminOpen} onSuccess={fetchAdmins} />
       <UpdateDialog open={updateDialogOpen} onOpenChange={setUpdateDialogOpen} onSuccess={fetchUpdateData} />
       <BadgeDialog open={badgeDialogOpen} onOpenChange={setBadgeDialogOpen} onSuccess={fetchUpdateData} />

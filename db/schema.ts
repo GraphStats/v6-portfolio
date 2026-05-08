@@ -42,3 +42,14 @@ export const siteUpdates = pgTable("site_updates", {
   show_last_update_prefix: boolean("show_last_update_prefix").default(true),
   updated_at: timestamp("updated_at").defaultNow(),
 });
+
+export const moments = pgTable("moments", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description"),
+  date: text("date").notNull(), // e.g., "Sept 2021" or "2021-09"
+  type: text("type").$type<"education" | "work" | "milestone">().default("milestone"),
+  icon: text("icon"), // name of the lucide icon
+  created_at: timestamp("created_at").defaultNow(),
+});
+

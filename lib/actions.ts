@@ -1,10 +1,10 @@
 "use server"
 
 import { db } from "@/db"
-import { projects, admins, settings, siteUpdates } from "@/db/schema"
+import { projects, admins, settings, siteUpdates, moments } from "@/db/schema"
 import { eq, desc, and } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
-import type { Project, Admin, SiteUpdate } from "./types"
+import type { Project, Admin, SiteUpdate, Moment } from "./types"
 import bcrypt from "bcryptjs"
 
 export async function createProject(data: Partial<Project>) {
@@ -263,3 +263,66 @@ export async function getProjects() {
     return { success: false, error: error.message, data: [] }
   }
 }
+
+export async function getMoments() {
+  try {
+    const data = await db.select().from(moments).orderBy(desc(moments.date))
+    return {
+      success: true,
+      data: data.map((m: any) => ({
+        ...m,
+        id: m.id.toString(),
+        created_at: m.created_at?.toISOString() || new Date().toISOString()
+      })) as Moment[]
+    }
+  } catch (error: any) {
+    console.error("Error fetching moments:", error)
+    return { success: false, error: error.message, data: [] }
+  }
+}
+
+export async function createMoment(data: Partial<Moment>) {
+  try {
+    const { id: _, created_at: __, ...insertData } = data as any
+    const [newMoment] = await db.insert(moments).values({
+      ...insertData,
+      created_at: new Date()
+    }).returning()
+
+    revalidatePath("/parcours")
+    revalidatePath("/admin/dashboard")
+    return { success: true, moment: newMoment }
+  } catch (error: any) {
+    console.error("Error creating moment:", error)
+    return { success: false, error: error.message }
+  }
+}
+
+export async function updateMoment(id: string, data: Partial<Moment>) {
+  try {
+    const { id: _, created_at: __, ...updateData } = data as any
+    await db.update(moments)
+      .set(updateData)
+      .where(eq(moments.id, parseInt(id)))
+
+    revalidatePath("/parcours")
+    revalidatePath("/admin/dashboard")
+    return { success: true }
+  } catch (error: any) {
+    console.error("Error updating moment:", error)
+    return { success: false, error: error.message }
+  }
+}
+
+export async function deleteMoment(id: string) {
+  try {
+    await db.delete(moments).where(eq(moments.id, parseInt(id)))
+    revalidatePath("/parcours")
+    revalidatePath("/admin/dashboard")
+    return { success: true }
+  } catch (error: any) {
+    console.error("Error deleting moment:", error)
+    return { success: false, error: error.message }
+  }
+}
+
