@@ -22,6 +22,20 @@ const ICON_MAP: Record<string, any> = {
   "sparkles": Sparkles,
 }
 
+const formatDate = (dateStr: string) => {
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return date.toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric'
+    }).replace(/\//g, ' / ');
+  } catch {
+    return dateStr;
+  }
+};
+
 export function AdminMomentCard({ moment, onDeleted, onUpdated }: AdminMomentCardProps) {
   const [editOpen, setEditOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
@@ -49,7 +63,7 @@ export function AdminMomentCard({ moment, onDeleted, onUpdated }: AdminMomentCar
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/70">{moment.type}</span>
-              <span className="text-[10px] font-bold text-muted-foreground bg-white/5 px-2 py-0.5 rounded-full">{moment.date}</span>
+              <span className="text-[10px] font-bold text-muted-foreground bg-white/5 px-2 py-0.5 rounded-full">{formatDate(moment.date)}</span>
             </div>
             <h4 className="font-bold text-foreground/90 group-hover:text-primary transition-colors">{moment.title}</h4>
             <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">

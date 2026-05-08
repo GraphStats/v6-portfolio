@@ -81,8 +81,8 @@ export function MomentForm({ moment, onSuccess }: MomentFormProps) {
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="date" className="text-[10px] uppercase tracking-widest text-muted-foreground ml-1">Date (e.g. Sept 2021)</Label>
-            <Input id="date" name="date" defaultValue={moment?.date} required className="h-10 rounded-xl border-white/10 bg-white/5" />
+            <Label htmlFor="date" className="text-[10px] uppercase tracking-widest text-muted-foreground ml-1">Date</Label>
+            <Input id="date" name="date" type="date" defaultValue={moment?.date} required className="h-10 rounded-xl border-white/10 bg-white/5" />
           </div>
           <div className="space-y-2">
             <Label className="text-[10px] uppercase tracking-widest text-muted-foreground ml-1">Type</Label>
