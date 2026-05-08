@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ChevronLeft, Map, Sparkles, GraduationCap, Briefcase, Trophy, Milestone } from "lucide-react"
+import { ChevronLeft, Map, Sparkles, GraduationCap, Briefcase, Trophy } from "lucide-react"
 import { getMaintenanceMode } from "@/lib/actions"
 import { redirect } from "next/navigation"
 import { isLocalRequest } from "@/lib/server-utils"
@@ -48,6 +48,9 @@ export default async function ParcoursPage() {
                     <h1 className="text-5xl md:text-7xl font-black tracking-tight font-display text-transparent bg-clip-text bg-gradient-to-br from-foreground via-foreground/90 to-foreground/50 text-glow">
                         MY JOURNEY
                     </h1>
+                    <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto leading-relaxed">
+                        A timeline of my professional experiences, education, and key milestones in the digital world.
+                    </p>
                 </div>
 
                 {/* Content Section (Empty as requested, but with a nice placeholder) */}
@@ -62,7 +65,7 @@ export default async function ParcoursPage() {
                                 I'm currently curating the best moments of my career to share them with you. Stay tuned!
                             </p>
                         </div>
-
+                        
                         {/* Visual guide for future content */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full pt-12 opacity-50">
                             <div className="p-6 rounded-2xl bg-background/30 border border-white/5 flex flex-col items-center gap-4">
