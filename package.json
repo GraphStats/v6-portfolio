@@ -2,9 +2,9 @@
   "name": "drayko-v6",
   "version": "6.1.8",
   "private": true,
-  "packageManager": "pnpm@11.0.8",
+  "packageManager": "pnpm@9.15.4",
   "engines": {
-    "node": ">=20.18.0"
+    "node": "20.x"
   },
   "scripts": {
     "build": "next build",
