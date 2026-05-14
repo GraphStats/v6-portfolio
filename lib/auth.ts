@@ -11,7 +11,7 @@ const ADMIN_SESSION_COOKIE = "admin_session"
 
 export async function verifyAdminCredentials(email: string, password: string): Promise<boolean> {
   console.log("[Auth] Verifying credentials for:", email)
-  
+
   try {
     const [admin] = await db.select()
       .from(admins)
@@ -24,7 +24,7 @@ export async function verifyAdminCredentials(email: string, password: string): P
     }
 
     const isValid = await bcrypt.compare(password, admin.password)
-    
+
     if (!isValid) {
       console.log("[Auth] Verification failed: Invalid password")
       return false

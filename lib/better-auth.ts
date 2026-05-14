@@ -7,12 +7,12 @@ import { dash } from "@better-auth/infra";
 export const auth = betterAuth({
     database: drizzleAdapter(db, {
         provider: "pg",
-        schema: schema,
+        schema,
     }),
     emailAndPassword: {
         enabled: true,
     },
     plugins: [
         dash(),
-    ]
+    ],
 });
