@@ -41,7 +41,7 @@ const techStack: TechItem[] = [
   { name: "Neon", logo: "https://github.com/neondatabase.png" },
   { name: "Firebase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" },
   { name: "Prisma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
-  { name: "Clerk", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/clerk.svg" },
+  { name: "Better Auth", logo: "https://www.svgrepo.com/show/532363/shield-check.svg" },
   { name: "Auth0", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/auth0.svg" },
   { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
   { name: "Tailscale", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tailscale.svg" },
@@ -70,7 +70,7 @@ function TechCard({ tech }: { tech: TechItem }) {
           alt={tech.name}
           width={48}
           height={48}
-          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS", "UniFi OS Server", "pnpm", "Express", "Clerk", "Auth0", "Tailscale", "MacOS"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
+          className={`w-full h-full object-contain transition-all duration-500 group-hover/card:scale-110 ${["Vercel", "AWS", "UniFi OS Server", "pnpm", "Express", "Better Auth", "Auth0", "Tailscale", "MacOS"].includes(tech.name) ? "brightness-0 dark:invert" : ""}`}
         />
       </div>
       <span className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground group-hover/card:text-foreground transition-colors">

@@ -6,21 +6,20 @@ import { Button } from "@/components/ui/button"
 import { ExternalLink, Github, ArrowUpRight, Hammer, Wrench, Construction, CheckCircle2, Archive, PackageCheck, ImageOff, Trophy, History, Play, Pause, Lock } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import dynamic from "next/dynamic"
-
-const ProjectCardWithClerk = dynamic(() => import("./clerk-integrated-components").then(m => m.ProjectCardWithClerk), { ssr: false })
+import { useSession } from "@/lib/auth-client"
+import { useRouter } from "next/navigation"
 
 interface ProjectCardProps {
   project: Project
 }
 
-function ProjectCardContent({ project, isSignedIn, SignInButton }: { project: Project; isSignedIn: boolean; SignInButton: any }) {
+function ProjectCardContent({ project, isSignedIn }: { project: Project; isSignedIn: boolean }) {
   const isFinished = project.is_completed;
   const isArchived = project.is_archived;
   const isInDev = project.in_development;
   const isPaused = project.development_status === 'paused';
   const requiresAuth = project.requires_auth;
-  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const router = useRouter();
 
   return (
     <div className={`group relative rounded-3xl overflow-hidden glass h-full flex flex-col perspective-card reveal-up transition-all duration-500 
@@ -37,18 +36,15 @@ function ProjectCardContent({ project, isSignedIn, SignInButton }: { project: Pr
               <div className="space-y-2">
                 <h3 className="text-xl font-bold text-white">Login required</h3>
                 <p className="text-white/80 text-sm max-w-xs">
-                  {publishableKey
-                    ? "This project requires authentication to be viewed."
-                    : "Authentication is disabled locally (Clerk key missing)."}
+                  This project requires authentication to be viewed.
                 </p>
               </div>
-              {publishableKey && SignInButton && (
-                <SignInButton mode="modal">
-                  <button className="px-6 py-3 bg-primary text-primary-foreground rounded-full font-bold hover:bg-primary/90 transition-colors shadow-lg">
-                    Sign in
-                  </button>
-                </SignInButton>
-              )}
+              <button 
+                onClick={() => router.push('/admin')}
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-full font-bold hover:bg-primary/90 transition-colors shadow-lg"
+              >
+                Sign in
+              </button>
             </div>
           </div>
         )}
@@ -322,16 +318,9 @@ function ProjectCardContent({ project, isSignedIn, SignInButton }: { project: Pr
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-
-  if (!publishableKey) {
-    return <ProjectCardContent project={project} isSignedIn={false} SignInButton={null} />
-  }
+  const { data: session } = useSession()
 
   return (
-    <ProjectCardWithClerk
-      project={project}
-      renderContent={(props: any) => <ProjectCardContent {...props} />}
-    />
+    <ProjectCardContent project={project} isSignedIn={!!session} />
   )
 }

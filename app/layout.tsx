@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Outfit } from "next/font/google"
 import { Footer } from "@/components/footer"
-import { ClerkThemeProvider } from "@/components/clerk-theme-provider"
 
 import "./globals.css"
 
@@ -28,14 +27,12 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} light`}>
       <body className="font-sans antialiased selection:bg-primary/30 selection:text-primary transition-colors duration-300" suppressHydrationWarning>
-        <ClerkThemeProvider>
-          <div className="relative flex min-h-screen flex-col">
-            <Suspense fallback={null}>
-              <main className="flex-1">{children}</main>
-            </Suspense>
-            <Footer />
-          </div>
-        </ClerkThemeProvider>
+        <div className="relative flex min-h-screen flex-col">
+          <Suspense fallback={null}>
+            <main className="flex-1">{children}</main>
+          </Suspense>
+          <Footer />
+        </div>
       </body>
     </html>
   )
