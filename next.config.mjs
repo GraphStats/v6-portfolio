@@ -43,7 +43,7 @@ const nextConfig = {
       },
     ],
   },
-  serverExternalPackages: ["better-auth", "@better-auth/infra"],
+  serverExternalPackages: ["better-auth", "@better-auth/infra", "zod"],
 }
 
 export default nextConfig
