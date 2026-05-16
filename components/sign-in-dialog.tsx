@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useState } from "react"
-import { signIn } from "@/lib/auth-client"
+import { signIn, signUp } from "@/lib/auth-client"
 import {
   Dialog,
   DialogContent,
@@ -21,29 +21,44 @@ interface SignInDialogProps {
 }
 
 export function SignInDialog({ children }: SignInDialogProps) {
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [open, setOpen] = useState(false)
+  const [mode, setMode] = useState<"signin" | "signup">("signin")
   const router = useRouter()
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError("")
 
     try {
-      const { data, error } = await signIn.email({
-        email,
-        password,
-      })
-
-      if (error) {
-        setError(error.message || "Échec de la connexion")
+      if (mode === "signin") {
+        const { data, error } = await signIn.email({
+          email,
+          password,
+        })
+        if (error) {
+          setError(error.message || "Échec de la connexion")
+        } else {
+          setOpen(false)
+          router.refresh()
+        }
       } else {
-        setOpen(false)
-        router.refresh()
+        const { data, error } = await signUp.email({
+          email,
+          password,
+          name,
+        })
+        if (error) {
+          setError(error.message || "Échec de l'inscription")
+        } else {
+          setOpen(false)
+          router.refresh()
+        }
       }
     } catch (err: any) {
       setError(err.message || "Une erreur est survenue")
@@ -59,12 +74,30 @@ export function SignInDialog({ children }: SignInDialogProps) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] glass border-white/10">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">Connexion</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">
+            {mode === "signin" ? "Connexion" : "Inscription"}
+          </DialogTitle>
           <DialogDescription className="text-white/60">
-            Entrez vos identifiants pour accéder au projet.
+            {mode === "signin" 
+              ? "Entrez vos identifiants pour accéder au projet." 
+              : "Créez un compte pour rejoindre le projet."}
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSignIn} className="space-y-4 mt-4">
+        <form onSubmit={handleAuth} className="space-y-4 mt-4">
+          {mode === "signup" && (
+            <div className="space-y-2">
+              <Label htmlFor="name">Nom</Label>
+              <Input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Votre nom"
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
+                required
+              />
+            </div>
+          )}
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -90,8 +123,21 @@ export function SignInDialog({ children }: SignInDialogProps) {
           </div>
           {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Connexion..." : "Se connecter"}
+            {loading 
+              ? (mode === "signin" ? "Connexion..." : "Inscription...") 
+              : (mode === "signin" ? "Se connecter" : "S'inscrire")}
           </Button>
+          <div className="text-center mt-4">
+            <button
+              type="button"
+              onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
+              {mode === "signin" 
+                ? "Pas encore de compte ? S'inscrire" 
+                : "Déjà un compte ? Se connecter"}
+            </button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>
